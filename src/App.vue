@@ -1,7 +1,7 @@
 <template>
   <div class="slider-container">
     <div class="slider-background" :style="{ backgroundImage: `url(${backgroundImage})` }">
-      <div class="slider" :style="{ left: sliderPosition + 'px' }" @mousedown="startDrag"></div>
+      <div class="puzzle-piece" :style="{ left: sliderPosition + 'px' }" @mousedown="startDrag"></div>
       <div class="mask" :style="{ left: targetPosition + 'px' }"></div>
     </div>
     <button @click="reset">重置</button>
@@ -15,10 +15,10 @@ import { ref } from 'vue';
 export default {
   setup() {
     const sliderPosition = ref(0);
-    const targetPosition = ref(300); // 目标位置，实际应用中可以随机生成
+    const targetPosition = ref(300);
     const isDragging = ref(false);
     const message = ref('');
-    const backgroundImage = ref('path/to/your/image.jpg'); // 你的背景图路径
+    const backgroundImage = ref('path/to/your/image.jpg');
 
     const startDrag = (e) => {
       isDragging.value = true;
@@ -29,8 +29,8 @@ export default {
     const onDrag = (e) => {
       if (isDragging.value) {
         const backgroundRect = document.querySelector('.slider-background').getBoundingClientRect();
-        let newPosition = e.clientX - backgroundRect.left - 25; // 25是滑块的宽度的一半
-        newPosition = Math.max(0, Math.min(newPosition, backgroundRect.width - 50)); // 限制在边界内
+        let newPosition = e.clientX - backgroundRect.left - 25;
+        newPosition = Math.max(0, Math.min(newPosition, backgroundRect.width - 50));
         sliderPosition.value = newPosition;
       }
     };
@@ -50,7 +50,7 @@ export default {
     const reset = () => {
       sliderPosition.value = 0;
       message.value = '';
-      targetPosition.value = Math.floor(Math.random() * (300 - 50)); // 重新随机目标位置
+      targetPosition.value = Math.floor(Math.random() * (300 - 50));
     };
 
     return {
@@ -76,13 +76,15 @@ export default {
   height: 200px;
   background-color: #f0f0f0;
   overflow: hidden;
+  background-size: cover;
 }
 
-.slider {
+.puzzle-piece {
   position: absolute;
   width: 50px;
-  height: 100%;
-  background-color: #007bff;
+  height: 50px;
+  background-color: #007bff; /* 可以换成拼图的图片 */
+  clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%, 50% 50%); /* 示例的拼图形状 */
   cursor: pointer;
   transition: left 0.1s;
 }
@@ -90,8 +92,9 @@ export default {
 .mask {
   position: absolute;
   width: 50px;
-  height: 100%;
-  background-color: rgba(255, 0, 0, 0.5);
+  height: 50px; /* 设置遮罩的高度 */
+  background-color: #ff0000; /* 可以换成拼图的图片 */
+  clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%, 50% 50%); /* 示例的拼图形状 */
   pointer-events: none;
 }
 </style>
