@@ -1,7 +1,14 @@
-# Vue 3 + Vite
+# 滑动验证码项目
 
-This template should help get you started developing with Vue 3 in Vite. The template uses Vue 3 `<script setup>` SFCs, check out the [script setup docs](https://v3.vuejs.org/api/sfc-script-setup.html#sfc-script-setup) to learn more.
+## 项目简介
 
-Learn more about IDE Support for Vue in the [Vue Docs Scaling up Guide](https://vuejs.org/guide/scaling-up/tooling.html#ide-support).
+这是一个使用 Vue 3 和 Vite 构建的滑动验证码项目。用户通过拖动滑块完成验证，增强用户体验。
 
-验证码
+## 快速开始
+
+### 1. 新建 Vite 项目
+
+使用以下命令创建一个新的 Vue 3 项目：
+
+```bash
+npm create vite@latest my-vue3-app -- --template vue

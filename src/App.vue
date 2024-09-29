@@ -28,9 +28,9 @@ export default {
 
     const onDrag = (e) => {
       if (isDragging.value) {
-        const rect = e.target.getBoundingClientRect();
-        let newPosition = e.clientX - rect.left - 25; // 25是滑块的宽度的一半
-        newPosition = Math.max(0, Math.min(newPosition, rect.width - 50)); // 限制在边界内
+        const backgroundRect = document.querySelector('.slider-background').getBoundingClientRect();
+        let newPosition = e.clientX - backgroundRect.left - 25; // 25是滑块的宽度的一半
+        newPosition = Math.max(0, Math.min(newPosition, backgroundRect.width - 50)); // 限制在边界内
         sliderPosition.value = newPosition;
       }
     };
